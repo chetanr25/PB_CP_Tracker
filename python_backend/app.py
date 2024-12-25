@@ -1,26 +1,24 @@
 from flask import Flask, request
+# from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 import requests
 import math
-
+import time
 app = Flask(__name__)
 
+# This is currently returning a 403 status code.
 @app.route("/codeforces")
 def codeforces():
     username = request.args.get("username")
-    url = f"https://codeforces.com/profile/chetanr25"
+    url = f"https://codeforces.com/profile/{username}"
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
     }
 
     r = requests.get(url, headers=headers)
-    print(r.status_code)
     soup = BeautifulSoup(r.text, 'html.parser')
-    print(soup.text)
-    rating = soup.find_all('span', class_='user-gray')
-    for i in rating:
-        print(i.text)
+    rating = soup.find_all('span', class_='user-gray')[1].text
     return rating
 
 @app.route("/leetcode")
