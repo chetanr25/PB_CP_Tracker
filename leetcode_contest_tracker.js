@@ -1,7 +1,7 @@
 function updateLeetCodeRatings() {
-    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sheetID = "1h5AXAPMB6t-eNESvXDloCx7WatqgWlOWQZG17QQDDE0" // PB
+    const spreadsheet = SpreadsheetApp.openById(sheetID)
     const sheet = spreadsheet.getSheetByName("Leetcode");
-  
     if (!sheet) {
       Logger.log("Sheet named 'Leetcode' not found!");
       return;
